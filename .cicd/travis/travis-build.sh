@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail
-cd $( dirname "${BASH_SOURCE[0]}" )/.. # Ensure we're in the repo root and not inside of scripts
-. ./.cicd/.helpers
+cd $( dirname "${BASH_SOURCE[0]}" )/.. # Ensure we're in the .cicd dir
+. ./.helpers
 
 CPU_CORES=$(getconf _NPROCESSORS_ONLN)
 if [[ "$(uname)" == Darwin ]]; then
@@ -19,5 +19,7 @@ if [[ "$(uname)" == Darwin ]]; then
     echo "$ ctest -j $CPU_CORES -LE _tests --output-on-failure -T Test"
     ctest -j $CPU_CORES -LE _tests --output-on-failure -T Test # run unit tests
 else # linux
-    execute docker run --rm -v $(pwd):/workdir -v /usr/lib/ccache -v $HOME/.ccache:/opt/.ccache -e CCACHE_DIR=/opt/.ccache $FULL_TAG
+    # Disable certain tests
+    DOCKER_RUN_EXTRAS="-e ENABLE_PARALLEL_TESTS=false"
+    execute docker run --rm -v $(pwd):/workdir -v /usr/lib/ccache -v $HOME/.ccache:/opt/.ccache -e CCACHE_DIR=/opt/.ccache $DOCKER_RUN_EXTRAS $FULL_TAG
 fi

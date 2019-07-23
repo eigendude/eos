@@ -72,11 +72,24 @@ ENV PATH=${PATH}:/mongodb-linux-x86_64-amazon-3.6.3/bin
 RUN curl -LO http://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/c/ccache-3.3.4-1.el7.x86_64.rpm \
   && yum install -y ccache-3.3.4-1.el7.x86_64.rpm
 
+
+ENV FUNCTIONS "function execute() { ${VERBOSE:-true} && echo \"--- Executing: $@\"; ${DRYRUN:-false} || \"$@\" }"
+
 # PRE_COMMANDS: Executed pre-cmake
 # CMAKE_EXTRAS: Executed right before the cmake path (on the end)
-ENV PRE_COMMANDS="export PATH=/usr/lib64/ccache:$PATH &&"
-ENV CMAKE_EXTRAS="-DCMAKE_CXX_COMPILER='clang++' -DCMAKE_C_COMPILER='clang'"
+ENV PRE_COMMANDS "export PATH=/usr/lib64/ccache:$PATH &&"
+ENV CMAKE_EXTRAS "-DCMAKE_CXX_COMPILER='clang++' -DCMAKE_C_COMPILER='clang'"
 
-CMD bash -c "$PRE_COMMANDS ccache -s && \
+# These are overriden in the travis-build.sh docker run command
+ENV ENABLE_PARALLEL_TESTS true
+ENV ENABLE_SERIAL_TESTS true
+ENV ENABLE_LR_TESTS true
+ENV ENABLE_SUBMODULE_REGRESSION_TEST true
+
+CMD bash -c "$FUNCTIONS && \
+    $PRE_COMMANDS ccache -s && \
     mkdir /workdir/build && cd /workdir/build && cmake -DCMAKE_BUILD_TYPE='Release' -DCORE_SYMBOL_NAME='SYS' -DOPENSSL_ROOT_DIR='/usr/include/openssl' -DBUILD_MONGO_DB_PLUGIN=true $CMAKE_EXTRAS /workdir && make -j $(getconf _NPROCESSORS_ONLN) && \
-    ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test"
+    if $ENABLE_PARALLEL_TESTS; then echo ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test; fi && \
+    if $ENABLE_SERIAL_TESTS; then echo ctest -L nonparallelizable_tests --output-on-failure -T Test; fi && \
+    if $ENABLE_LR_TESTS; then ctest -L long_running_tests --output-on-failure -T Test ; fi && \
+    if $ENABLE_SUBMODULE_REGRESSION_TEST; then ; fi"
