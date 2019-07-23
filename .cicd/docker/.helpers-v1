@@ -1,5 +1,5 @@
 function execute() {
     ${TRAVIS:-false} && echo -en "travis_fold:start:$(echo $@)\r" || echo "--- Executing: $@"
     "$@"
-    ${TRAVIS:-false} && echo -en "travis_fold:end:$(echo $@)\r"
+    ${TRAVIS:-false} && echo -en "travis_fold:end:$(echo $@)\r" || echo " - Execution complete"
 }

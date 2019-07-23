@@ -84,7 +84,7 @@ ENV ENABLE_LR_TESTS=true
 ENV ENABLE_SUBMODULE_REGRESSION_TEST=true
 
 # Bring in helpers so we can wrap commands in execute and clean up logging
-COPY ./docker/.helpers /tmp/.helpers
+COPY ./docker/.helpers-v1 /tmp/.helpers
 
 CMD bash -c ". /tmp/.helpers && \
     $PRE_COMMANDS execute ccache -s && \
