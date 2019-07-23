@@ -73,7 +73,7 @@ RUN curl -LO http://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/c
   && yum install -y ccache-3.3.4-1.el7.x86_64.rpm
 
 
-ENV FUNCTIONS="function execute() { ${VERBOSE:-true} && echo \"--- Executing: $@\"; ${DRYRUN:-false} || \"$@\" }"
+ENV FUNCTIONS="function execute() { \${VERBOSE:-true} && echo \"--- Executing: \$@\"; \${DRYRUN:-false} || \"\$@\" }"
 
 # PRE_COMMANDS: Executed pre-cmake
 # CMAKE_EXTRAS: Executed right before the cmake path (on the end)
@@ -86,7 +86,7 @@ ENV ENABLE_SERIAL_TESTS=true
 ENV ENABLE_LR_TESTS=true
 ENV ENABLE_SUBMODULE_REGRESSION_TEST=true
 
-CMD bash -c "echo $FUNCTIONS; $FUNCTIONS && \
+CMD bash -c "\"$FUNCTIONS\" && \
     $PRE_COMMANDS ccache -s && \
     mkdir /workdir/build && cd /workdir/build && cmake -DCMAKE_BUILD_TYPE='Release' -DCORE_SYMBOL_NAME='SYS' -DOPENSSL_ROOT_DIR='/usr/include/openssl' -DBUILD_MONGO_DB_PLUGIN=true $CMAKE_EXTRAS /workdir && make -j $(getconf _NPROCESSORS_ONLN) && \
     if $ENABLE_PARALLEL_TESTS; then echo ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test; fi && \
