@@ -12,11 +12,11 @@ steps:
     agents:
       queue: "automation-eos-builder-fleet"
 
-  - trigger: "eosio-base-images-beta"
-    label: ":docker: Ensure base images exist"
-    build:
-      commit: "${BUILDKITE_COMMIT}"
-      branch: "${BUILDKITE_BRANCH}"
+  # - trigger: "eosio-base-images-beta"
+  #   label: ":docker: Ensure base images exist"
+  #   build:
+  #     commit: "${BUILDKITE_COMMIT}"
+  #     branch: "${BUILDKITE_BRANCH}"
 
   - wait
 
