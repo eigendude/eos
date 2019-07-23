@@ -26,7 +26,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-amazonlinux-2-713f5d646f7c8e668d5e1d77d1636c829a6c1e1d"
+          image: "eosio/producer:eosio-amazonlinux-2-e7d0102509903e133204f84f91c43a52d119cc19"
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_AMAZON_LINUX_2
 
