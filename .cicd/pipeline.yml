@@ -26,7 +26,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-amazonlinux-2-16658003d38c9820e78dafb694d97d609af81c61"
+          image: "eosio/producer:eosio-amazonlinux-2-a4b16bbb0ec7739a5380017bcd3f9a291be827de"
           environment:
             - "ENABLE_PARALLEL_TESTS=true"
             - "ENABLE_SERIAL_TESTS=true"
