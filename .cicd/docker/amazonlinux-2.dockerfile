@@ -84,9 +84,9 @@ ENV ENABLE_LR_TESTS=true
 ENV ENABLE_SUBMODULE_REGRESSION_TEST=true
 
 # Bring in helpers so we can wrap commands in execute and clean up logging
-COPY .helpers /tmp/.helpers
+COPY ./.helpers /tmp/.helpers
 
-CMD bash -c ". ./tmp/.helpers && \
+CMD bash -c "ls -laht /tmp && . ./tmp/.helpers && \
     $PRE_COMMANDS execute ccache -s && \
     mkdir /workdir/build && cd /workdir/build && execute cmake -DCMAKE_BUILD_TYPE='Release' -DCORE_SYMBOL_NAME='SYS' -DOPENSSL_ROOT_DIR='/usr/include/openssl' -DBUILD_MONGO_DB_PLUGIN=true $CMAKE_EXTRAS /workdir && make -j $(getconf _NPROCESSORS_ONLN) && \
     if $ENABLE_PARALLEL_TESTS; then echo execute ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test; fi && \

@@ -6,11 +6,11 @@ env:
 
 steps:
 
-  - label: ":webhook: Trigger Travis CI Build"
-    command:
-      - "./.cicd/travis/travis-trigger.sh"
-    agents:
-      queue: "automation-eos-builder-fleet"
+  # - label: ":webhook: Trigger Travis CI Build"
+  #   command:
+  #     - "./.cicd/travis/travis-trigger.sh"
+  #   agents:
+  #     queue: "automation-eos-builder-fleet"
 
   # - trigger: "eosio-base-images-beta"
   #   label: ":docker: Ensure base images exist"
@@ -26,7 +26,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-amazonlinux-2-ebd3a74a30df9b7c7d42eba2ba0e0f7f3b0b159d"
+          image: "eosio/producer:eosio-amazonlinux-2-76313f7a1c64d767cd7953c0e58712143f7dfe0a"
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_AMAZON_LINUX_2
 
