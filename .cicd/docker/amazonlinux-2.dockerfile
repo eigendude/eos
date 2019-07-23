@@ -91,5 +91,5 @@ CMD bash -c "$FUNCTIONS && \
     mkdir /workdir/build && cd /workdir/build && cmake -DCMAKE_BUILD_TYPE='Release' -DCORE_SYMBOL_NAME='SYS' -DOPENSSL_ROOT_DIR='/usr/include/openssl' -DBUILD_MONGO_DB_PLUGIN=true $CMAKE_EXTRAS /workdir && make -j $(getconf _NPROCESSORS_ONLN) && \
     if $ENABLE_PARALLEL_TESTS; then echo ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test; fi && \
     if $ENABLE_SERIAL_TESTS; then echo ctest -L nonparallelizable_tests --output-on-failure -T Test; fi && \
-    if $ENABLE_LR_TESTS; then ctest -L long_running_tests --output-on-failure -T Test ; fi && \
-    if $ENABLE_SUBMODULE_REGRESSION_TEST; then ; fi"
+    if $ENABLE_LR_TESTS; then ctest -L long_running_tests --output-on-failure -T Test; fi && \
+    if $ENABLE_SUBMODULE_REGRESSION_TEST; then cd .. && ./.cicd/submodule-regression-checker.sh; fi"
