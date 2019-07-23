@@ -26,7 +26,14 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-amazonlinux-2-e7d0102509903e133204f84f91c43a52d119cc19"
+          image: "eosio/producer:eosio-amazonlinux-2-16658003d38c9820e78dafb694d97d609af81c61"
+          environment:
+            - "ENABLE_PARALLEL_TESTS=true"
+            - "ENABLE_SERIAL_TESTS=true"
+            - "ENABLE_LR_TESTS=true"
+            - "ENABLE_PACKAGE_BUILDER=true"
+            - "ENABLE_BREW_UPDATER=true"
+            - "ENABLE_SUBMODULE_REGRESSION_TEST=true"
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_AMAZON_LINUX_2
 

@@ -19,6 +19,6 @@ if [[ "$(uname)" == Darwin ]]; then
     echo "$ ctest -j $CPU_CORES -LE _tests --output-on-failure -T Test"
     ctest -j $CPU_CORES -LE _tests --output-on-failure -T Test # run unit tests
 else # linux
-    DOCKER_RUN_EXTRAS="-e ENABLE_PARALLEL_TESTS=false"
-    execute docker run --rm -v $(pwd):/workdir -v /usr/lib/ccache -v $HOME/.ccache:/opt/.ccache -e CCACHE_DIR=/opt/.ccache -e TRAVIS $DOCKER_RUN_EXTRAS $FULL_TAG
+    DOCKER_RUN_EXTRAS="-e ENABLE_PACKAGE_BUILDER=false -e ENABLE_BREW_UPDATER=false" # Travis doesn't need to test or push packages
+    execute eval docker run --rm -v $(pwd):/workdir -v /usr/lib/ccache -v $HOME/.ccache:/opt/.ccache -e CCACHE_DIR=/opt/.ccache -e TRAVIS $DOCKER_RUN_EXTRAS $FULL_TAG
 fi
