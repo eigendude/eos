@@ -1,0 +1,5 @@
+function execute() {
+    echo -en "travis_fold:start:$(echo $@)\r"
+    "$@"
+    echo -en "travis_fold:end:$(echo $@)\r"
+}
