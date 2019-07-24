@@ -20,21 +20,21 @@ steps:
 
   - wait
 
-  # - label: ":aws: [Amazon] 2 Build"
-  #   agents:
-  #     queue: "automation-eos-builder-fleet"
-  #   plugins:
-  #     - docker#v3.2.0:
-  #         debug: $DEBUG
-  #         image: "eosio/producer:eosio-amazonlinux-2-c5943391115a4e70a14950f51b9d927a93377030"
-  #         environment:
-  #           - "ENABLE_PARALLEL_TESTS=true"
-  #           - "ENABLE_SERIAL_TESTS=true"
-  #           - "ENABLE_LR_TESTS=true"
-  #           - "ENABLE_PACKAGE_BUILDER=true"
-  #           - "ENABLE_SUBMODULE_REGRESSION_TEST=true"
-  #   timeout: $BUILD_TIMEOUT
-  #   skip: $SKIP_AMAZON_LINUX_2
+  - label: ":aws: [Amazon] 2 Build"
+    agents:
+      queue: "automation-eos-builder-fleet"
+    plugins:
+      - docker#v3.2.0:
+          debug: $DEBUG
+          image: "eosio/producer:eosio-amazonlinux-2-c5943391115a4e70a14950f51b9d927a93377030"
+          environment:
+            - "ENABLE_PARALLEL_TESTS=true"
+            - "ENABLE_SERIAL_TESTS=true"
+            - "ENABLE_LR_TESTS=true"
+            - "ENABLE_PACKAGE_BUILDER=true"
+            - "ENABLE_SUBMODULE_REGRESSION_TEST=true"
+    timeout: $BUILD_TIMEOUT
+    skip: $SKIP_AMAZON_LINUX_2
 
   - label: ":centos: [CentOS] 7 Build"
     command:
@@ -44,7 +44,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-centos-7-959b228de50edaba6e1e02cba65b80d453870090"
+          image: "eosio/producer:eosio-centos-7-2118af67ae9ec508694f95fc0a19ce5ecc0a6c5e"
           environment:
             - "ENABLE_PARALLEL_TESTS=true"
             - "ENABLE_SERIAL_TESTS=true"

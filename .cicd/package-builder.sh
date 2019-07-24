@@ -22,7 +22,7 @@ else
         mkdir -p ~/rpmbuild/SOURCES
         mkdir -p ~/rpmbuild/SPECS
         mkdir -p ~/rpmbuild/SRPMS
-        sudo yum install -y rpm-build
+        yum install -y rpm-build
     elif [[ $ID == 'amzn' ]]; then
         echo "SKIPPED: We do not generate $NAME packages since they use rpms created from Centos."
         exit 0
