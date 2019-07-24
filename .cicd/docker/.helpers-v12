@@ -3,5 +3,6 @@ function execute() {
     ${TRAVIS:-false} && echo -en "travis_fold:start:$(echo $@)\r" || true
     echo "--- Executing: $@"
     "$@"
-    [[ $TRAVIS == true ]] && echo -en "travis_fold:end:$(echo $@)\r" # Cannot use ${TRAVIS:-false} here or it will allow failures to proceed
+    [[ $? != 0 ]] && exit $?
+    ${TRAVIS:-false} && echo -en "travis_fold:end:$(echo $@)\r" || echo "-- Execution Complete" # Cannot use ${TRAVIS:-false} here or it will allow failures to proceed
 }
