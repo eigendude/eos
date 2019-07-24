@@ -3,5 +3,5 @@ function fold-execute() {
     echo "--- Executing: $@"
     "$@"
     echo $?
-    [[ $? != 0 ]] && exit $?
+    [[ $? != 0 ]] && exit $? || true
 }
