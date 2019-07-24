@@ -34,6 +34,8 @@ else
         exit 1
     fi
 fi
+ls -alht build
+ls -laht build/programs/nodeos/
 BASE_COMMIT=$(cat build/programs/nodeos/config.hpp | grep 'version' | awk '{print $5}' | tr -d ';')
 BASE_COMMIT="${BASE_COMMIT:2:42}"
 echo "Found build against $BASE_COMMIT."
