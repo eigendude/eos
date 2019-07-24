@@ -83,13 +83,27 @@ RUN curl -LO https://github.com/ccache/ccache/releases/download/v3.4.1/ccache-3.
   && make install \
   && cd / && rm -rf ccache-3.4.1/
 
-COPY .helpers /tmp/.helpers
 # PRE_COMMANDS: Executed pre-cmake
 # CMAKE_EXTRAS: Executed right before the cmake path (on the end)
-ENV PRE_COMMANDS="export PATH=/usr/lib/ccache:$PATH &&"
+ENV PRE_COMMANDS="export PATH=/usr/lib/ccache:\$PATH"
 ENV CMAKE_EXTRAS="$CMAKE_EXTRAS -DCMAKE_TOOLCHAIN_FILE='/tmp/pinned_toolchain.cmake' -DCMAKE_CXX_COMPILER_LAUNCHER=ccache"
 
-CMD bash -c ". ./tmp/.helpers && \
-  $PRE_COMMANDS ccache -s && \
-  mkdir /workdir/build && cd /workdir/build && cmake -DCMAKE_BUILD_TYPE='Release' -DCORE_SYMBOL_NAME='SYS' -DOPENSSL_ROOT_DIR='/usr/include/openssl' -DBUILD_MONGO_DB_PLUGIN=true $CMAKE_EXTRAS /workdir && make -j $(getconf _NPROCESSORS_ONLN) && \
-  ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test"
+# These are overriden in the travis-build.sh docker run command
+ENV ENABLE_PARALLEL_TESTS=true
+ENV ENABLE_SERIAL_TESTS=true
+ENV ENABLE_LR_TESTS=false
+ENV ENABLE_PACKAGE_BUILDER=true
+ENV ENABLE_SUBMODULE_REGRESSION_TEST=true
+
+# Bring in helpers that provides execute function so we can get better logging in BK and TRAV
+COPY ./docker/.helpers-v33 /tmp/.helpers
+
+CMD bash -c ". /tmp/.helpers && \
+    $PRE_COMMANDS fold-execute ccache -s && \
+    mkdir /workdir/build && cd /workdir/build && fold-execute cmake -DCMAKE_BUILD_TYPE='Release' -DCORE_SYMBOL_NAME='SYS' -DOPENSSL_ROOT_DIR='/usr/include/openssl' -DBUILD_MONGO_DB_PLUGIN=true $CMAKE_EXTRAS /workdir && \
+    fold-execute make -j $(getconf _NPROCESSORS_ONLN) && \
+    if $ENABLE_PARALLEL_TESTS; then fold-execute ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test; fi && \
+    if $ENABLE_SERIAL_TESTS; then fold-execute ctest -L nonparallelizable_tests --output-on-failure -T Test; fi && \
+    if $ENABLE_LR_TESTS; then fold-execute ctest -L long_running_tests --output-on-failure -T Test; fi && \
+    if $ENABLE_PACKAGE_BUILDER; then cd /workdir && fold-execute ./.cicd/package-builder.sh; fi && \
+    if $ENABLE_SUBMODULE_REGRESSION_TEST; then cd /workdir && fold-execute ./.cicd/submodule-regression-checker.sh; fi"
