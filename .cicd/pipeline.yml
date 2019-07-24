@@ -26,7 +26,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-amazonlinux-2-e6f7bfc695493206afe0ed6e11c343382845c27a"
+          image: "eosio/producer:eosio-amazonlinux-2-6c67fe015f7c1bd446124a070be9e2147065bebe"
           environment:
             - "ENABLE_PARALLEL_TESTS=true"
             - "ENABLE_SERIAL_TESTS=true"
@@ -36,17 +36,17 @@ steps:
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_AMAZON_LINUX_2
 
-  # - label: ":centos: [CentOS] 7 Build"
-  #   command:
-  #     - ""
-  #   agents:
-  #     queue: "automation-eos-builder-fleet"
-  #   plugins:
-  #     - docker#v3.2.0:
-  #         debug: $DEBUG
-  #         image: "eosio/producer:eosio-centos-7-1da3fbb6e740bf8c81db8cc79c08b5c8b3d1b167"
-  #   timeout: $BUILD_TIMEOUT
-  #   skip: $SKIP_CENTOS_7
+  - label: ":centos: [CentOS] 7 Build"
+    command:
+      - ""
+    agents:
+      queue: "automation-eos-builder-fleet"
+    plugins:
+      - docker#v3.2.0:
+          debug: $DEBUG
+          image: "eosio/producer:eosio-centos-7-be1cab42e8da9fb173a3a39d0e4682dd5b1fe04d"
+    timeout: $BUILD_TIMEOUT
+    skip: $SKIP_CENTOS_7
 
   # - label: ":ubuntu: [Ubuntu] 16.04 Build"
   #   agents:
