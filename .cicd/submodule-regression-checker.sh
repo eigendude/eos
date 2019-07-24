@@ -5,16 +5,21 @@ declare -A PR_MAP
 declare -A BASE_MAP
 
 # Support Travis and BK
-${TRAVIS:-false} && BASE_BRANCH=$TRAVIS_BRANCH || BASE_BRANCH=${BUILDKITE_PULL_REQUEST_BASE_BRANCH:-$BUILDKITE_BRANCH}
-git log -n 1 --pretty=%d HEAD
-CURRENT_BRANCH=$(git log -n 1 --pretty=%d HEAD) # git rev-parse --abbrev-ref HEAD doesn't work
+if ${TRAVIS:-false}; then
+  BASE_BRANCH=$TRAVIS_BRANCH
+  CURRENT_BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+else
+  BASE_BRANCH=${BUILDKITE_PULL_REQUEST_BASE_BRANCH:-$BUILDKITE_BRANCH}
+  CURRENT_BRANCH=$BUILDKITE_BRANCH
+fi
+
 echo "getting submodule info for $CURRENT_BRANCH"
 while read -r a b; do
   PR_MAP[$a]=$b
 done < <(git submodule --quiet foreach --recursive 'echo $path `git log -1 --format=%ct`')
 
 echo "getting submodule info for $BASE_BRANCH"
-git checkout "$BASE_BRANCH" &> /dev/null
+git checkout $BASE_BRANCH &> /dev/null
 git submodule update --init &> /dev/null
 while read -r a b; do
   BASE_MAP[$a]=$b
