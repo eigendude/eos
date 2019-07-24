@@ -1,3 +1,4 @@
+# Don't wrap cd or anything that wouldn't do well in a subshell
 function execute() {
     ${TRAVIS:-false} && echo -en "travis_fold:start:$(echo $@)\r" || true
     echo "--- Executing: $@"

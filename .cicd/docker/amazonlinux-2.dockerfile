@@ -82,7 +82,6 @@ ENV ENABLE_PARALLEL_TESTS=true
 ENV ENABLE_SERIAL_TESTS=true
 ENV ENABLE_LR_TESTS=false
 ENV ENABLE_PACKAGE_BUILDER=true
-ENV ENABLE_BREW_UPDATER=true
 ENV ENABLE_SUBMODULE_REGRESSION_TEST=true
 
 # Bring in helpers that provides execute function so we can get better logging in BK and TRAV
@@ -95,6 +94,5 @@ CMD bash -c ". /tmp/.helpers && \
     if $ENABLE_PARALLEL_TESTS; then execute echo ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test; fi && \
     if $ENABLE_SERIAL_TESTS; then execute echo ctest -L nonparallelizable_tests --output-on-failure -T Test; fi && \
     if $ENABLE_LR_TESTS; then execute echo ctest -L long_running_tests --output-on-failure -T Test; fi && \
-    if $ENABLE_PACKAGE_BUILDER; then execute echo PACKAGING; fi && \
-    if $ENABLE_BREW_UPDATER; then execute echo BREW-UPDATER; fi && \
-    if $ENABLE_SUBMODULE_REGRESSION_TEST; then cd .. && execute ./.cicd/submodule-regression-checker.sh; fi"
+    if $ENABLE_PACKAGE_BUILDER; then cd .. && execute ./.cicd/package-builder.sh; fi && \
+    if $ENABLE_SUBMODULE_REGRESSION_TEST; then execute ./.cicd/submodule-regression-checker.sh; fi"
