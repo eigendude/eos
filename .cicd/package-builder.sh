@@ -24,7 +24,7 @@ else
         execute mkdir -p ~/rpmbuild/SRPMS
         execute sudo yum install -y rpm-build
     elif [[ $ID == 'amzn' ]]; then
-        echo "SKIPPED: We do not generate $NAME packages since they use rpms created for Centos."
+        echo "SKIPPED: We do not generate $NAME packages since they use rpms created from Centos."
         exit 0
     else
         echo 'ERROR: Could not determine which operating system this script is running on!'
