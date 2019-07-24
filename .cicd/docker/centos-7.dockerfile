@@ -100,9 +100,12 @@ ENV ENABLE_PACKAGE_BUILDER=true
 ENV ENABLE_SUBMODULE_REGRESSION_TEST=true
 
 # Bring in helpers that provides execute function so we can get better logging in BK and TRAV
-COPY ./docker/.helpers-v13 /tmp/.helpers
+COPY ./docker/.helpers-v14 /tmp/.helpers
 
 CMD bash -c ". /tmp/.helpers && \
     $PRE_COMMANDS execute ccache -s && \
     if $ENABLE_PACKAGE_BUILDER; then cd /workdir && execute ./.cicd/package-builder.sh; fi && \
     if $ENABLE_SUBMODULE_REGRESSION_TEST; then cd /workdir && execute ./.cicd/submodule-regression-checker.sh; fi"
+
+
+    
