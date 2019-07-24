@@ -94,5 +94,5 @@ CMD bash -c ". /tmp/.helpers && \
     if $ENABLE_PARALLEL_TESTS; then execute echo ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test; fi && \
     if $ENABLE_SERIAL_TESTS; then execute echo ctest -L nonparallelizable_tests --output-on-failure -T Test; fi && \
     if $ENABLE_LR_TESTS; then execute echo ctest -L long_running_tests --output-on-failure -T Test; fi && \
-    if $ENABLE_PACKAGE_BUILDER; then cd .. && execute ./.cicd/package-builder.sh; fi && \
-    if $ENABLE_SUBMODULE_REGRESSION_TEST; then execute ./.cicd/submodule-regression-checker.sh; fi"
+    if $ENABLE_PACKAGE_BUILDER; then cd /workdir && execute ./.cicd/package-builder.sh; fi && \
+    if $ENABLE_SUBMODULE_REGRESSION_TEST; then cd /workdir && execute ./.cicd/submodule-regression-checker.sh; fi"
