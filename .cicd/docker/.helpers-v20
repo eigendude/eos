@@ -1,0 +1,7 @@
+function fold-execute() {
+    [[ $TRAVIS == true ]] && echo -en "travis_fold:start:$(echo $@)\r"
+    echo "--- Executing: $@"
+    "$@"
+    [ $? -eq 0 ] || exit $?
+    [[ $TRAVIS == true ]] && echo -en "travis_fold:end:$(echo $@)\r" # Cannot use ${TRAVIS:-false} here or it will allow failures to proceed
+}
