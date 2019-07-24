@@ -5,6 +5,7 @@ declare -A PR_MAP
 declare -A BASE_MAP
 
 # Support Travis and BK
+echo HERE
 ${TRAVIS:-false} && BASE_BRANCH=$TRAVIS_BRANCH || BASE_BRANCH=${BUILDKITE_PULL_REQUEST_BASE_BRANCH:-$BUILDKITE_BRANCH}
 git status | grep 'On branch' | awk -F'On branch ' '{print $2}'
 CURRENT_BRANCH=$(git status | grep 'On branch' | awk -F'On branch ' '{print $2}') # git rev-parse --abbrev-ref HEAD doesn't work
