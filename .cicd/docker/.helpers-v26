@@ -1,4 +1,5 @@
 function fold-execute() {
+    set -eo pipefail
     ${TRAVIS:-false} && echo -en "travis_fold:start:$(echo $@)\r" | true
     echo "--- Executing: $@"
     "$@"
