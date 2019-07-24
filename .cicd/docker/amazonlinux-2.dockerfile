@@ -86,7 +86,7 @@ ENV ENABLE_BREW_UPDATER=true
 ENV ENABLE_SUBMODULE_REGRESSION_TEST=true
 
 # Bring in helpers that provides execute function so we can get better logging in BK and TRAV
-COPY ./docker/.helpers-v5 /tmp/.helpers
+COPY ./docker/.helpers-v6 /tmp/.helpers
 
 CMD bash -c ". /tmp/.helpers && \
     $PRE_COMMANDS execute ccache -s && \
