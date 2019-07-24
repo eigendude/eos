@@ -2,6 +2,5 @@ function fold-execute() {
     ${TRAVIS:-false} && echo -en "travis_fold:start:$(echo $@)\r" | true
     echo "--- Executing: $@"
     "$@"
-    [ $? -eq 0 ] || exit "$?"
     ${TRAVIS:-false} && echo -en "travis_fold:end:$(echo $@)\r" || true
 }
