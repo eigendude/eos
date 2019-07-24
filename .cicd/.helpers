@@ -3,7 +3,6 @@ VERBOSE=${VERBOSE:-true}
 export PROJECT_NAME="eosio"
 
 # Set IMAGE_TAG using arg (generate-base-images.sh) or env (travis.yml)
-( [[ $(uname) != 'Darwin' ]] && [[ -z $IMAGE_TAG ]] && [[ -z $1 ]] ) && echo "You must provide the distro IMAGE_TAG name (example: ubuntu-18.04) as argument \$1 or set it within your ENV" && exit 1
 export IMAGE_TAG=${IMAGE_TAG:-$1}
 
 function execute() {
@@ -41,7 +40,7 @@ function docker_tag_exists() {
 }
 
 # If you're on mac and you want to generate the image, use "force" as $2
-if [[ $2 == 'force' ]] || [[ $(uname) != 'Darwin' ]]; then # Darwin doesn't need hash (yet)
+if [[ ! -z $IMAGE_TAG ]]; then # Darwin doesn't need hash (yet)
     determine-hash "docker/${IMAGE_TAG}.dockerfile"
     [[ -z $DETERMINED_HASH ]] && echo "DETERMINED_HASH empty! (check determine-hash function)" && exit 1
     export FULL_TAG="eosio/producer:${PROJECT_NAME}-$HASHED_IMAGE_TAG"
