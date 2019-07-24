@@ -7,7 +7,7 @@ declare -A BASE_MAP
 # Support Travis and BK
 ${TRAVIS:-false} && BASE_BRANCH=$TRAVIS_BRANCH || BASE_BRANCH=${BUILDKITE_PULL_REQUEST_BASE_BRANCH:-BUILDKITE_BRANCH}
 
-CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
+CURRENT_BRANCH=$(git status | grep 'On branch' | awk -F'On branch ' '{print $2}') # git rev-parse --abbrev-ref HEAD doesn't work
 echo "getting submodule info for $CURRENT_BRANCH"
 while read -r a b; do
   PR_MAP[$a]=$b
