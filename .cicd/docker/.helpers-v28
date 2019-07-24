@@ -3,6 +3,6 @@ function fold-execute() {
     echo "--- Executing: $@"
     "$@"
     ret_code=$?
-    [ $? -eq 0 ] || exit ${ret_code}
+    [ $? -eq 0 ] || exit "${ret_code}"
     ${TRAVIS:-false} && echo -en "travis_fold:end:$(echo $@)\r" || true
 }
