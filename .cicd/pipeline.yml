@@ -36,17 +36,17 @@ steps:
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_AMAZON_LINUX_2
 
-  # - label: ":centos: [CentOS] 7 Build"
-  #   command:
-  #     - ""
-  #   agents:
-  #     queue: "automation-eos-builder-fleet"
-  #   plugins:
-  #     - docker#v3.2.0:
-  #         debug: $DEBUG
-  #         image: "eosio/producer:eosio-centos-7-d45789dfb1a5b830a62381afd205b34d3d7c2d63"
-  #   timeout: $BUILD_TIMEOUT
-  #   skip: $SKIP_CENTOS_7
+  - label: ":centos: [CentOS] 7 Build"
+    command:
+      - ""
+    agents:
+      queue: "automation-eos-builder-fleet"
+    plugins:
+      - docker#v3.2.0:
+          debug: $DEBUG
+          image: "eosio/producer:eosio-centos-7-1da3fbb6e740bf8c81db8cc79c08b5c8b3d1b167"
+    timeout: $BUILD_TIMEOUT
+    skip: $SKIP_CENTOS_7
 
   # - label: ":ubuntu: [Ubuntu] 16.04 Build"
   #   agents:
