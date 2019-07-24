@@ -44,7 +44,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-centos-7-3939b2129e05b2a301dad09b583887d42d666113"
+          image: "eosio/producer:eosio-centos-7-abbf515bb4ecee48c42e1a0ec547b33566db37f3"
           environment:
             - "ENABLE_PARALLEL_TESTS=true"
             - "ENABLE_SERIAL_TESTS=true"
