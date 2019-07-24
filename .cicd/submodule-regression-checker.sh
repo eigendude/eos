@@ -5,9 +5,9 @@ declare -A PR_MAP
 declare -A BASE_MAP
 
 # Support Travis and BK
-${TRAVIS:-false} && BASE_BRANCH=$TRAVIS_BRANCH || BASE_BRANCH=$BUILDKITE_PULL_REQUEST_BASE_BRANCH
+${TRAVIS:-false} && BASE_BRANCH=$TRAVIS_BRANCH || BASE_BRANCH=${BUILDKITE_PULL_REQUEST_BASE_BRANCH:-BUILDKITE_BRANCH}
 
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
 echo "getting submodule info for $CURRENT_BRANCH"
 while read -r a b; do
   PR_MAP[$a]=$b
