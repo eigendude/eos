@@ -2,12 +2,14 @@
 set -eo pipefail
 cd $( dirname "${BASH_SOURCE[0]}" ) # Ensure we're in the .cicd dir
 . ./.helpers
+echo $(uname)
 if [[ $(uname) == 'Darwin' ]]; then
     echo 'Darwin family detected, building for brew.'
     [[ -z $ARTIFACT ]] && ARTIFACT='*.rb;*.tar.gz'
     PACKAGE_TYPE='brew'
 else
     . /etc/os-release
+    cat /etc/os-release
     if [[ "$ID_LIKE" == 'debian' || "$ID" == 'debian' ]]; then
         echo 'Debian family detected, building for dpkg.'
         [[ -z $ARTIFACT ]] && ARTIFACT='*.deb'
