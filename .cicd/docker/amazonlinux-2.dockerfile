@@ -85,12 +85,12 @@ ENV ENABLE_PACKAGE_BUILDER=true
 ENV ENABLE_BREW_UPDATER=true
 ENV ENABLE_SUBMODULE_REGRESSION_TEST=true
 
-# Bring in helpers so we can wrap commands in execute and clean up logging
-COPY ./docker/.helpers-v4 /tmp/.helpers
+# Bring in helpers that provides execute function so we can get better logging in BK and TRAV
+COPY ./docker/.helpers-v5 /tmp/.helpers
 
 CMD bash -c ". /tmp/.helpers && \
     $PRE_COMMANDS execute ccache -s && \
-    mkdir /workdir/build && cd /workdir/build && execute pwd && ls -laht /workdir && execute cmake -DCMAKE_BUILD_TYPE='Release' -DCORE_SYMBOL_NAME='SYS' -DOPENSSL_ROOT_DIR='/usr/include/openssl' -DBUILD_MONGO_DB_PLUGIN=true $CMAKE_EXTRAS /workdir && make -j $(getconf _NPROCESSORS_ONLN) && \
+    mkdir /workdir/build && cd /workdir/build && execute cmake -DCMAKE_BUILD_TYPE='Release' -DCORE_SYMBOL_NAME='SYS' -DOPENSSL_ROOT_DIR='/usr/include/openssl' -DBUILD_MONGO_DB_PLUGIN=true $CMAKE_EXTRAS /workdir && make -j $(getconf _NPROCESSORS_ONLN) && \
     if $ENABLE_PARALLEL_TESTS; then execute ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test; fi && \
     if $ENABLE_SERIAL_TESTS; then execute ctest -L nonparallelizable_tests --output-on-failure -T Test; fi && \
     if $ENABLE_LR_TESTS; then execute ctest -L long_running_tests --output-on-failure -T Test; fi && \
