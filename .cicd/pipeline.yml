@@ -61,6 +61,12 @@ steps:
       - docker#v3.2.0:
           debug: $DEBUG
           image: "eosio/producer:eosio-ubuntu-16.04-48af224a858ec03f63e85497709f772fe9eac762"
+          environment:
+            - "ENABLE_PARALLEL_TESTS=true"
+            - "ENABLE_SERIAL_TESTS=true"
+            - "ENABLE_LR_TESTS=true"
+            - "ENABLE_PACKAGE_BUILDER=true"
+            - "ENABLE_SUBMODULE_REGRESSION_TEST=true"
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_UBUNTU_16
 
@@ -71,6 +77,12 @@ steps:
       - docker#v3.2.0:
           debug: $DEBUG
           image: "eosio/producer:eosio-ubuntu-18.04-4623314baf3661fc8e518dc1b7073f7d8ff14a74"
+          environment:
+            - "ENABLE_PARALLEL_TESTS=true"
+            - "ENABLE_SERIAL_TESTS=true"
+            - "ENABLE_LR_TESTS=true"
+            - "ENABLE_PACKAGE_BUILDER=true"
+            - "ENABLE_SUBMODULE_REGRESSION_TEST=true"
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_UBUNTU_18
 
