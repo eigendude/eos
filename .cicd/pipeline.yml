@@ -27,36 +27,33 @@ steps:
   #   agents:
   #     queue: "automation-eos-builder-fleet"
 
-  - label: ":aws: [Amazon] 2 Build"
-    agents:
-      queue: "automation-eos-builder-fleet"
-    plugins:
-      - docker#v3.2.0:
-          debug: $DEBUG
-          image: "eosio/producer:eosio-amazonlinux-2-d99bcf9e1e0304599c9684d7ba469e394546eb48"
-          environment:
-            - "ENABLE_LR_TESTS=true"
-          propagate-environment: true
-    timeout: $BUILD_TIMEOUT
-    skip: $SKIP_AMAZON_LINUX_2
-
-  # - label: ":centos: [CentOS] 7 Build"
-  #   command:
-  #     - ""
+  # - label: ":aws: [Amazon] 2 Build"
   #   agents:
   #     queue: "automation-eos-builder-fleet"
   #   plugins:
   #     - docker#v3.2.0:
   #         debug: $DEBUG
-  #         image: "eosio/producer:eosio-centos-7-842031579ed78065d8a97923173e0f9d65747b30"
+  #         image: "eosio/producer:eosio-amazonlinux-2-d99bcf9e1e0304599c9684d7ba469e394546eb48"
   #         environment:
-  #           - "ENABLE_PARALLEL_TESTS=true"
-  #           - "ENABLE_SERIAL_TESTS=true"
   #           - "ENABLE_LR_TESTS=true"
-  #           - "ENABLE_PACKAGE_BUILDER=true"
-  #           - "ENABLE_SUBMODULE_REGRESSION_TEST=true"
+  #         propagate-environment: true
   #   timeout: $BUILD_TIMEOUT
-  #   skip: $SKIP_CENTOS_7
+  #   skip: $SKIP_AMAZON_LINUX_2
+
+  - label: ":centos: [CentOS] 7 Build"
+    command:
+      - ""
+    agents:
+      queue: "automation-eos-builder-fleet"
+    plugins:
+      - docker#v3.2.0:
+          debug: $DEBUG
+          image: "eosio/producer:eosio-centos-7-ade3ca9d00b744c100d2ca058aaf3a8af0f02b06"
+          environment:
+            - "ENABLE_LR_TESTS=true"
+          propagate-environment: true
+    timeout: $BUILD_TIMEOUT
+    skip: $SKIP_CENTOS_7
 
   # - label: ":ubuntu: [Ubuntu] 16.04 Build"
   #   agents:
