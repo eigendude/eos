@@ -48,9 +48,10 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-centos-7-6cb00db09596acfb1d1fed1de205fbf1359f6e13"
+          image: "eosio/producer:eosio-centos-7-77a58eaa11b9e20b9904bf41f41abe7ab461a1cb"
           environment:
             - "ENABLE_LR_TESTS=true"
+            - "BUILDKITE_AGENT_TOKEN=$BUILDKITE_AGENT_TOKEN"
           propagate-environment: true
           mount-buildkite-agent: false
     timeout: $BUILD_TIMEOUT
