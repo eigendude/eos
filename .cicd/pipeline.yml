@@ -48,7 +48,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: true
-          image: "eosio/producer:eosio-centos-7-ad329d5781b132df4bcc17762ccc4a234983e8df"
+          image: "eosio/producer:eosio-centos-7-aa737186202330228ce457afc0e8d5bfabc05099"
           environment:
             - "ENABLE_LR_TESTS=true"
             - "BUILDKITE_AGENT_ACCESS_TOKEN"
