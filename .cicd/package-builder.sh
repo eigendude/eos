@@ -2,6 +2,7 @@
 set -eo pipefail
 cd $( dirname "${BASH_SOURCE[0]}" ) # Ensure we're in the .cicd dir
 . ./.helpers
+cd /workdir
 if [[ $(uname) == 'Darwin' ]]; then
     echo 'Darwin family detected, building for brew.'
     [[ -z $ARTIFACT ]] && ARTIFACT='*.rb;*.tar.gz'
@@ -34,14 +35,12 @@ else
         exit 1
     fi
 fi
-ls -alht build
-ls -laht build/programs/nodeos/
 BASE_COMMIT=$(cat build/programs/nodeos/config.hpp | grep 'version' | awk '{print $5}' | tr -d ';')
 BASE_COMMIT="${BASE_COMMIT:2:42}"
 echo "Found build against $BASE_COMMIT."
 cd build/packages
 chmod 755 ./*.sh
-./generate_package.sh "$PACKAGE_TYPE"
+./generate_package.sh $PACKAGE_TYPE
 [[ -d x86_64 ]] && cd 'x86_64' # backwards-compatibility with release/1.6.x
 execute buildkite-agent artifact upload "./$ARTIFACT"
 for A in $(echo $ARTIFACT | tr ';' ' '); do
