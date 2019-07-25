@@ -89,7 +89,7 @@ COPY ./docker/.helpers-v33 /tmp/.helpers
 
 CMD bash -c ". /tmp/.helpers && $PRE_COMMANDS && \
     fold-execute ccache -s && \
-    find / -name buildkite-agent && \
+    /usr/bin/buildkite-agent stop && \
     mkdir /workdir/build && cd /workdir/build && fold-execute cmake -DCMAKE_BUILD_TYPE='Release' -DCORE_SYMBOL_NAME='SYS' -DOPENSSL_ROOT_DIR='/usr/include/openssl' -DBUILD_MONGO_DB_PLUGIN=true $CMAKE_EXTRAS /workdir && \
     fold-execute make -j $(getconf _NPROCESSORS_ONLN) && \
     if $ENABLE_PARALLEL_TESTS; then fold-execute ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test; fi && \
