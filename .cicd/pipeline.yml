@@ -52,6 +52,7 @@ steps:
           environment:
             - "ENABLE_LR_TESTS=true"
           propagate-environment: true
+          mount-buildkite-agent: false
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_CENTOS_7
 
