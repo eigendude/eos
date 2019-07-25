@@ -94,7 +94,7 @@ RUN echo -e "[buildkite-agent]\nname = Buildkite Pty Ltd\nbaseurl = https://yum.
 
 # PRE_COMMANDS: Executed pre-cmake
 # CMAKE_EXTRAS: Executed right before the cmake path (on the end)
-ENV PRE_COMMANDS="buildkite-agent --agent-access-token $BUILDKITE_AGENT_ACCESS_TOKEN start && touch test && buildkite-agent artifact upload test && source /opt/rh/devtoolset-8/enable && source /opt/rh/rh-python36/enable && export PATH=/usr/lib64/ccache:\$PATH"
+ENV PRE_COMMANDS='buildkite-agent --agent-access-token $BUILDKITE_AGENT_ACCESS_TOKEN start && touch test && buildkite-agent artifact upload test && source /opt/rh/devtoolset-8/enable && source /opt/rh/rh-python36/enable && export PATH=/usr/lib64/ccache:$PATH'
 
 # These are overriden in the travis-build.sh docker run command
 ENV ENABLE_PARALLEL_TESTS=true
