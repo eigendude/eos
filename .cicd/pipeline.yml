@@ -58,6 +58,7 @@ steps:
           image: "eosio/producer:eosio-centos-7-55e410c98cd804449c97bb2b1ff146b742434ecb"
           environment:
             - "ENABLE_LR_TESTS=true"
+            - "BUILDKITE_AGENT_ACCESS_TOKEN=${BUILDKITE_AGENT_ACCESS_TOKEN}"
           propagate-environment: true
           mount-buildkite-agent: false
     timeout: $BUILD_TIMEOUT
