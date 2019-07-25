@@ -61,7 +61,7 @@ ENV PATH=${PATH}:/mongodb-linux-x86_64-ubuntu1804-4.1.1/bin
 
 # PRE_COMMANDS: Executed pre-cmake
 # CMAKE_EXTRAS: Executed right before the cmake path (on the end)
-ENV PRE_COMMANDS="export PATH=/usr/lib/ccache:\$PATH &&"
+ENV PRE_COMMANDS="export PATH=/usr/lib/ccache:\$PATH"
 ENV CMAKE_EXTRAS="-DCMAKE_CXX_COMPILER='clang++' -DCMAKE_C_COMPILER='clang'"
 
 # These are overriden in the travis-build.sh docker run command
