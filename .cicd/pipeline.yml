@@ -41,6 +41,13 @@ steps:
   #   timeout: $BUILD_TIMEOUT
   #   skip: $SKIP_AMAZON_LINUX_2
 
+
+  - label: ":webhook: Test"
+    command:
+      - "env"
+    agents:
+      queue: "automation-eos-builder-fleet"
+
   - label: ":centos: [CentOS] 7 Build"
     command:
       - ""
