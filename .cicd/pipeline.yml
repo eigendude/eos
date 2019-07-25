@@ -26,7 +26,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-amazonlinux-2-216a9bcf64a20d97fb2bbe7b01d8cf712b46597b"
+          image: "eosio/producer:eosio-amazonlinux-2-00dbd81c20e09e7cd95247a386978c049fea6bde"
           environment:
             - "ENABLE_PARALLEL_TESTS=true"
             - "ENABLE_SERIAL_TESTS=true"
@@ -44,7 +44,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-centos-7-56a40fb037fb421352c4aad249f07002dcdadaf5"
+          image: "eosio/producer:eosio-centos-7-b240620dffa1b3f965c033d83eb684aaf28d8842"
           environment:
             - "ENABLE_PARALLEL_TESTS=true"
             - "ENABLE_SERIAL_TESTS=true"
@@ -54,25 +54,25 @@ steps:
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_CENTOS_7
 
-  # - label: ":ubuntu: [Ubuntu] 16.04 Build"
-  #   agents:
-  #     queue: "automation-eos-builder-fleet"
-  #   plugins:
-  #     - docker#v3.2.0:
-  #         debug: $DEBUG
-  #         image: "eosio/producer:eosio-ubuntu-16.04-4f430ef21e359ef2581c25255c99e5411adfaed9"
-  #   timeout: $BUILD_TIMEOUT
-  #   skip: $SKIP_UBUNTU_16
+  - label: ":ubuntu: [Ubuntu] 16.04 Build"
+    agents:
+      queue: "automation-eos-builder-fleet"
+    plugins:
+      - docker#v3.2.0:
+          debug: $DEBUG
+          image: "eosio/producer:eosio-ubuntu-16.04-48af224a858ec03f63e85497709f772fe9eac762"
+    timeout: $BUILD_TIMEOUT
+    skip: $SKIP_UBUNTU_16
 
-  # - label: ":ubuntu: [Ubuntu] 18.04 Build"
-  #   agents:
-  #     queue: "automation-eos-builder-fleet"
-  #   plugins:
-  #     - docker#v3.2.0:
-  #         debug: $DEBUG
-  #         image: "eosio/producer:eosio-ubuntu-18.04-14091ac0e5618b0ea5ce026cd75b648efbde4be7"
-  #   timeout: $BUILD_TIMEOUT
-  #   skip: $SKIP_UBUNTU_18
+  - label: ":ubuntu: [Ubuntu] 18.04 Build"
+    agents:
+      queue: "automation-eos-builder-fleet"
+    plugins:
+      - docker#v3.2.0:
+          debug: $DEBUG
+          image: "eosio/producer:eosio-ubuntu-18.04-4623314baf3661fc8e518dc1b7073f7d8ff14a74"
+    timeout: $BUILD_TIMEOUT
+    skip: $SKIP_UBUNTU_18
 
   # - label: ":darwin: [Darwin] 10.14 Build"
   #   command:
