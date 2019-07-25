@@ -59,7 +59,7 @@ steps:
           environment:
             - "ENABLE_LR_TESTS=true"
             - "BUILDKITE_AGENT_ACCESS_TOKEN='${BUILDKITE_AGENT_ACCESS_TOKEN}'"
-          propagate-environment: true
+          propagate-environment: false
           mount-buildkite-agent: false
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_CENTOS_7
