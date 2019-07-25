@@ -48,7 +48,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-centos-7-e5109c70dd49f71769c6b5b45c5e4bd8dce5552c"
+          image: "eosio/producer:eosio-centos-7-d9abd957ebc506e5029136ff701dd14441e2df57"
           environment:
             - "ENABLE_LR_TESTS=true"
           propagate-environment: true
