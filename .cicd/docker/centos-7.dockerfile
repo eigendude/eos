@@ -90,11 +90,11 @@ ENV CCACHE_PATH="/opt/rh/devtoolset-8/root/usr/bin"
 
 # Install Buildkite Agent
 RUN echo -e "[buildkite-agent]\nname = Buildkite Pty Ltd\nbaseurl = https://yum.buildkite.com/buildkite-agent/stable/x86_64/\nenabled=1\ngpgcheck=0\npriority=1" > /etc/yum.repos.d/buildkite-agent.repo && \
-  yum -y install buildkite-agent
+  yum -y install buildkite-agent && sed -i 's/token=\"xxx\"//g' /etc/buildkite-agent/buildkite-agent.cfg && cat /etc/buildkite-agent/buildkite-agent.cfg
 
 # PRE_COMMANDS: Executed pre-cmake
 # CMAKE_EXTRAS: Executed right before the cmake path (on the end)
-ENV PRE_COMMANDS="cat /etc/buildkite-agent/buildkite-agent.cfg && env && buildkite-agent start && touch test && buildkite-agent artifact upload test && source /opt/rh/devtoolset-8/enable && source /opt/rh/rh-python36/enable && export PATH=/usr/lib64/ccache:\$PATH"
+ENV PRE_COMMANDS="buildkite-agent start && touch test && buildkite-agent artifact upload test && source /opt/rh/devtoolset-8/enable && source /opt/rh/rh-python36/enable && export PATH=/usr/lib64/ccache:\$PATH"
 
 # These are overriden in the travis-build.sh docker run command
 ENV ENABLE_PARALLEL_TESTS=true
