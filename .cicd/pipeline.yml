@@ -60,7 +60,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-ubuntu-16.04-7eb7ff2b13b08ea133d307fe1c7b0e17d790cb4d2"
+          image: "eosio/producer:eosio-ubuntu-16.04-7eb7ff2b13b08ea133d307fe1c7b0e17d790cb4d"
           environment:
             - "ENABLE_PARALLEL_TESTS=true"
             - "ENABLE_SERIAL_TESTS=true"
