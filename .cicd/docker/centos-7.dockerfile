@@ -107,7 +107,7 @@ CMD bash -c ". /tmp/.helpers && $PRE_COMMANDS && \
     mkdir /workdir/build && cd /workdir/build && fold-execute cmake -DCMAKE_BUILD_TYPE='Release' -DCORE_SYMBOL_NAME='SYS' -DOPENSSL_ROOT_DIR='/usr/include/openssl' -DBUILD_MONGO_DB_PLUGIN=true $CMAKE_EXTRAS /workdir && \
     fold-execute make -j $(getconf _NPROCESSORS_ONLN) && \
     if $ENABLE_PARALLEL_TESTS; then fold-execute ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test; fi && \
-    if $ENABLE_SERIAL_TESTS; then fold-execute mongod --fork --logpath mongod.log && fold-execute ctest -L nonparallelizable_tests --output-on-failure -T Test; fi && \
+    if $ENABLE_SERIAL_TESTS; then mkdir -p ./mongodb && fold-execute mongod --dbpath ./mongodb --fork --logpath mongod.log && fold-execute ctest -L nonparallelizable_tests --output-on-failure -T Test; fi && \
     if $ENABLE_LR_TESTS; then fold-execute ctest -L long_running_tests --output-on-failure -T Test; fi && \
     if $ENABLE_PACKAGE_BUILDER; then cd /workdir && fold-execute ./.cicd/package-builder.sh; fi && \
     if $ENABLE_SUBMODULE_REGRESSION_TEST; then cd /workdir && fold-execute ./.cicd/submodule-regression-checker.sh; fi"
