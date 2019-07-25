@@ -21,11 +21,11 @@ steps:
   - wait
 
 
-  - label: ":webhook: Test"
-    command:
-      - "find / -name buildkite-agent"
-    agents:
-      queue: "automation-eos-builder-fleet"
+  # - label: ":webhook: Test"
+  #   command:
+  #     - "find / -name buildkite-agent"
+  #   agents:
+  #     queue: "automation-eos-builder-fleet"
 
   - label: ":aws: [Amazon] 2 Build"
     agents:
