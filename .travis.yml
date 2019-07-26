@@ -12,6 +12,7 @@ matrix:
       services: docker
       env:
         - IMAGE_TAG='ubuntu-18.04'
+        - 
     - os: linux
       dist: xenial
       services: docker
@@ -45,6 +46,7 @@ matrix:
             - openssl
             - boost@1.70
             - ccache
+            - mongodb
       env: 
         - PATH="/usr/local/opt/ccache/libexec:$PATH"
 script: |
