@@ -51,7 +51,7 @@ steps:
           image: "eosio/producer:eosio-centos-7-97d966fc74a0f0fcf446c8f70c368d75be54cd08"
           environment:
             - "ENABLE_LR_TESTS=true"
-            - "BUILDKITE_API_KEY" # Needed for buildkite-agent upload
+            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload
           mount-buildkite-agent: false
           propagate-environment: true # Need for buildkite-agent upload (JOB_ID, etc)
     timeout: $BUILD_TIMEOUT
