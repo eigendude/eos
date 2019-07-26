@@ -48,10 +48,10 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: true
-          image: "eosio/producer:eosio-centos-7-19e80e362db2102ad0b49be7c5a2d641ab3908b1"
+          image: "eosio/producer:eosio-centos-7-97d966fc74a0f0fcf446c8f70c368d75be54cd08"
           environment:
             - "ENABLE_LR_TESTS=true"
-            - "BUILDKITE_AGENT_ACCESS_TOKEN"
+            - "BUILDKITE_API_KEY" # Needed for buildkite-agent upload
           mount-buildkite-agent: false
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_CENTOS_7
