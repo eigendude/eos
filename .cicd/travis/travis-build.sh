@@ -8,6 +8,7 @@ pwd
 
 CPU_CORES=$(getconf _NPROCESSORS_ONLN)
 if [[ "$(uname)" == Darwin ]]; then
+    ./.cicd/.helpers-v33
     mkdir -p build && cd build && cmake ..
     make -j$(getconf _NPROCESSORS_ONLN)
     if $ENABLE_PARALLEL_TESTS; then fold-execute ctest -j$(getconf _NPROCESSORS_ONLN) -LE _tests --output-on-failure -T Test; fi
