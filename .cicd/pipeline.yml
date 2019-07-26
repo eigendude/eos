@@ -26,7 +26,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: $DEBUG
-          image: "eosio/producer:eosio-amazonlinux-2-d99bcf9e1e0304599c9684d7ba469e394546eb48"
+          image: "eosio/producer:eosio-amazonlinux-2-2bfa68283db71fe9c7fff8e38ce273481a6c045e"
           environment:
             - "ENABLE_LR_TESTS=true"
             - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload
