@@ -48,7 +48,7 @@ steps:
     plugins:
       - docker#v3.2.0:
           debug: true
-          image: "eosio/producer:eosio-centos-7-87d23769bd825ed45718f09bbf9a2efde5e63b5e"
+          image: "eosio/producer:eosio-centos-7-8d787567f70fabbb7111fe8b5669bd3d6a7ea7f0"
           environment:
             - "ENABLE_LR_TESTS=true"
             - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload
