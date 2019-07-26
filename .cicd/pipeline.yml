@@ -6,39 +6,34 @@ env:
 
 steps:
 
-  # - label: ":webhook: Trigger Travis CI Build"
-  #   command:
-  #     - "./.cicd/travis/travis-trigger.sh"
-  #   agents:
-  #     queue: "automation-eos-builder-fleet"
+  - label: ":webhook: Trigger Travis CI Build"
+    command:
+      - "./.cicd/travis/travis-trigger.sh"
+    agents:
+      queue: "automation-eos-builder-fleet"
 
-  # - trigger: "eosio-base-images-beta"
-  #   label: ":docker: Ensure base images exist"
-  #   build:
-  #     commit: "${BUILDKITE_COMMIT}"
-  #     branch: "${BUILDKITE_BRANCH}"
+  - trigger: "eosio-base-images-beta"
+    label: ":docker: Ensure base images exist"
+    build:
+      commit: "${BUILDKITE_COMMIT}"
+      branch: "${BUILDKITE_BRANCH}"
 
   - wait
 
-
-  # - label: ":webhook: Test"
-  #   command:
-  #     - "find / -name buildkite-agent"
-  #   agents:
-  #     queue: "automation-eos-builder-fleet"
-
-  # - label: ":aws: [Amazon] 2 Build"
-  #   agents:
-  #     queue: "automation-eos-builder-fleet"
-  #   plugins:
-  #     - docker#v3.2.0:
-  #         debug: $DEBUG
-  #         image: "eosio/producer:eosio-amazonlinux-2-d99bcf9e1e0304599c9684d7ba469e394546eb48"
-  #         environment:
-  #           - "ENABLE_LR_TESTS=true"
-  #         propagate-environment: true
-  #   timeout: $BUILD_TIMEOUT
-  #   skip: $SKIP_AMAZON_LINUX_2
+  - label: ":aws: [Amazon] 2 Build"
+    agents:
+      queue: "automation-eos-builder-fleet"
+    plugins:
+      - docker#v3.2.0:
+          debug: $DEBUG
+          image: "eosio/producer:eosio-amazonlinux-2-d99bcf9e1e0304599c9684d7ba469e394546eb48"
+          environment:
+            - "ENABLE_LR_TESTS=true"
+            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload
+          mount-buildkite-agent: false # Mounting bk-agent doesn't work, so disable it
+          propagate-environment: true # Need for buildkite-agent upload (JOB_ID, etc)
+    timeout: $BUILD_TIMEOUT
+    skip: $SKIP_AMAZON_LINUX_2
 
   - label: ":centos: [CentOS] 7 Build"
     command:
