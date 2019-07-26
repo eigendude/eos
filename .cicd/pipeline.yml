@@ -108,6 +108,8 @@ steps:
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_MOJAVE
 
+  - wait
+  
   - command: |
       echo '+++ :compression: Extracting Test Metrics Code'
       tar -zxf test-metrics.tar.gz
