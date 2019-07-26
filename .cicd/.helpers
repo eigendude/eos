@@ -2,13 +2,6 @@ DRYRUN=${DRYRUN:-false}
 VERBOSE=${VERBOSE:-true}
 export PROJECT_NAME="eosio"
 
-# Mac defaults for steps
-export ENABLE_PARALLEL_TESTS=${ENABLE_PARALLEL_TESTS:-true}
-export ENABLE_SERIAL_TESTS=${ENABLE_SERIAL_TESTS:-true}
-export ENABLE_LR_TESTS=${ENABLE_LR_TESTS:-false}
-export ENABLE_PACKAGE_BUILDER=${ENABLE_PACKAGE_BUILDER:-true}
-export ENABLE_SUBMODULE_REGRESSION_TEST=${ENABLE_SUBMODULE_REGRESSION_TEST:-true}
-
 # Set IMAGE_TAG using arg (generate-base-images.sh) or env (travis.yml)
 export IMAGE_TAG=${IMAGE_TAG:-$1}
 
