@@ -28,7 +28,6 @@ function determine-hash() {
 function generate_docker_image() {
     # If we cannot pull the image, we build and push it first.
     docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-    pwd
     docker build -t $FULL_TAG -f ./docker/${IMAGE_TAG}.dockerfile .
     docker push $FULL_TAG
 }
