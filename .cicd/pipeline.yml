@@ -107,6 +107,7 @@ steps:
     skip: $SKIP_MOJAVE
 
   - wait
+    continue_on_failure: true
 
   - command: |
       echo '+++ :compression: Extracting Test Metrics Code'
