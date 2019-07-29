@@ -123,7 +123,7 @@ steps:
 
   - label: ":centos: [Centos] 7 PB"
     command:
-      - "buildkite-agent artifact download build.tar.gz . --step ':centos: [CentOS] 7 Build & Test' --agent-access-token $$BUILDKITE_AGENT_ACCESS_TOKEN && tar -xzf build.tar.gz"
+      - "cd /workdir && buildkite-agent artifact download build.tar.gz . --step ':centos: [CentOS] 7 Build & Test' --agent-access-token $$BUILDKITE_AGENT_ACCESS_TOKEN && tar -xzf build.tar.gz"
       - "./.cicd/package-builder.sh"
     plugins:
       - docker#v3.2.0:
@@ -140,7 +140,7 @@ steps:
 
   - label: ":ubuntu: [Ubuntu] 16.04 PB"
     command:
-      - "buildkite-agent artifact download build.tar.gz . --step ':ubuntu: [Ubuntu] 16.04 Build & Test' --agent-access-token $$BUILDKITE_AGENT_ACCESS_TOKEN && tar -xzf build.tar.gz"
+      - "cd /workdir && buildkite-agent artifact download build.tar.gz . --step ':ubuntu: [Ubuntu] 16.04 Build & Test' --agent-access-token $$BUILDKITE_AGENT_ACCESS_TOKEN && tar -xzf build.tar.gz"
       - "./.cicd/package-builder.sh"
     plugins:
       - docker#v3.2.0:
@@ -156,7 +156,7 @@ steps:
 
   - label: ":ubuntu: [Ubuntu] 18.04 PB"
     command:
-      - "buildkite-agent artifact download build.tar.gz . --step ':ubuntu: [Ubuntu] 18.04 Build & Test' --agent-access-token $$BUILDKITE_AGENT_ACCESS_TOKEN && tar -xzf build.tar.gz"
+      - "cd /workdir && buildkite-agent artifact download build.tar.gz . --step ':ubuntu: [Ubuntu] 18.04 Build & Test' --agent-access-token $$BUILDKITE_AGENT_ACCESS_TOKEN && tar -xzf build.tar.gz"
       - "./.cicd/package-builder.sh"
     plugins:
       - docker#v3.2.0:
@@ -172,7 +172,7 @@ steps:
 
   - label: ":darwin: [Mojave] PB"
     command:
-      - "buildkite-agent artifact download build.tar.gz . --step ':darwin: [Darwin] 10.14 Build & Test' --agent-access-token $$BUILDKITE_AGENT_ACCESS_TOKEN && tar -xzf build.tar.gz"
+      - "mkdir -p eos && cd eos && buildkite-agent artifact download build.tar.gz . --step ':darwin: [Darwin] 10.14 Build & Test' --agent-access-token $$BUILDKITE_AGENT_ACCESS_TOKEN && tar -xzf build.tar.gz"
       - "./.cicd/package-builder.sh"
     plugins:
       - chef/anka#v0.5.1:
