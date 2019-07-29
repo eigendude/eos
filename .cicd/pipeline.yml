@@ -29,9 +29,9 @@ steps:
           debug: $DEBUG
           image: "eosio/producer:eosio-amazonlinux-2-5a71ed47d141f921444c6b896b5caa76c083d70f"
           environment:
-            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload
+            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload/download
           mount-buildkite-agent: false # Mounting bk-agent doesn't work, so disable it
-          propagate-environment: true # Need for buildkite-agent upload (JOB_ID, etc)
+          propagate-environment: true # Need for buildkite-agent upload/download (JOB_ID, etc)
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_AMAZON_LINUX_2
 
@@ -46,9 +46,9 @@ steps:
           image: "eosio/producer:eosio-centos-7-0e734920cdff17015f066cb83615cb1e160dea57"
           environment:
             # - "ENABLE_LR_TESTS=true"
-            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload
+            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload/download
           mount-buildkite-agent: false # Mounting bk-agent doesn't work, so disable it
-          propagate-environment: true # Need for buildkite-agent upload (JOB_ID, etc)
+          propagate-environment: true # Need for buildkite-agent upload/download (JOB_ID, etc)
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_CENTOS_7
 
@@ -60,9 +60,9 @@ steps:
           debug: $DEBUG
           image: "eosio/producer:eosio-ubuntu-16.04-c92c1436b3e073fb9ea32d94e37724620eb8ea7c"
           environment:
-            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload
+            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload/download
           mount-buildkite-agent: false # Mounting bk-agent doesn't work, so disable it
-          propagate-environment: true # Need for buildkite-agent upload (JOB_ID, etc)
+          propagate-environment: true # Need for buildkite-agent upload/download (JOB_ID, etc)
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_UBUNTU_16
 
@@ -74,9 +74,9 @@ steps:
           debug: $DEBUG
           image: "eosio/producer:eosio-ubuntu-18.04-310f821ab6042a5b9ad560ced0be07fb28d1f611"
           environment:
-            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload
+            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload/download
           mount-buildkite-agent: false # Mounting bk-agent doesn't work, so disable it
-          propagate-environment: true # Need for buildkite-agent upload (JOB_ID, etc)
+          propagate-environment: true # Need for buildkite-agent upload/download (JOB_ID, etc)
     timeout: $BUILD_TIMEOUT
     skip: $SKIP_UBUNTU_18
 
@@ -131,9 +131,9 @@ steps:
           image: "eosio/producer:eosio-centos-7-0e734920cdff17015f066cb83615cb1e160dea57"
           environment:
             # - "ENABLE_LR_TESTS=true"
-            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload
+            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload/download
           mount-buildkite-agent: false # Mounting bk-agent doesn't work, so disable it
-          propagate-environment: true # Need for buildkite-agent upload (JOB_ID, etc)
+          propagate-environment: true # Need for buildkite-agent upload/download (JOB_ID, etc)
     agents:
       queue: "automation-eos-builder-fleet"
     timeout: 10
@@ -147,9 +147,9 @@ steps:
           debug: $DEBUG
           image: "eosio/producer:eosio-ubuntu-16.04-c92c1436b3e073fb9ea32d94e37724620eb8ea7c"
           environment:
-            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload
+            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload/download
           mount-buildkite-agent: false # Mounting bk-agent doesn't work, so disable it
-          propagate-environment: true # Need for buildkite-agent upload (JOB_ID, etc)
+          propagate-environment: true # Need for buildkite-agent upload/download (JOB_ID, etc)
     agents:
       queue: "automation-eos-builder-fleet"
     timeout: 10
@@ -163,9 +163,9 @@ steps:
           debug: $DEBUG
           image: "eosio/producer:eosio-ubuntu-18.04-310f821ab6042a5b9ad560ced0be07fb28d1f611"
           environment:
-            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload
+            - "BUILDKITE_AGENT_ACCESS_TOKEN" # Needed for buildkite-agent upload/download
           mount-buildkite-agent: false # Mounting bk-agent doesn't work, so disable it
-          propagate-environment: true # Need for buildkite-agent upload (JOB_ID, etc)
+          propagate-environment: true # Need for buildkite-agent upload/download (JOB_ID, etc)
     agents:
       queue: "automation-eos-builder-fleet"
     timeout: 10
