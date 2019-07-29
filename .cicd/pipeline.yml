@@ -136,7 +136,7 @@ steps:
           mount-buildkite-agent: false # Mounting bk-agent doesn't work, so disable it
           propagate-environment: true # Need for buildkite-agent upload/download (JOB_ID, etc)
     agents:
-      queue: "automation-eos-builder-fleet"
+      queue: "automation-basic-builder-fleet"
     timeout: 10
 
   - label: ":ubuntu: [Ubuntu] 16.04 PB"
@@ -152,7 +152,7 @@ steps:
           mount-buildkite-agent: false # Mounting bk-agent doesn't work, so disable it
           propagate-environment: true # Need for buildkite-agent upload/download (JOB_ID, etc)
     agents:
-      queue: "automation-eos-builder-fleet"
+      queue: "automation-basic-builder-fleet"
     timeout: 10
 
   - label: ":ubuntu: [Ubuntu] 18.04 PB"
@@ -168,7 +168,7 @@ steps:
           mount-buildkite-agent: false # Mounting bk-agent doesn't work, so disable it
           propagate-environment: true # Need for buildkite-agent upload/download (JOB_ID, etc)
     agents:
-      queue: "automation-eos-builder-fleet"
+      queue: "automation-basic-builder-fleet"
     timeout: 10
 
   - label: ":darwin: [Mojave] PB"
@@ -192,5 +192,5 @@ steps:
     command:
       - "./.cicd/submodule-regression-checker.sh"
     agents:
-      queue: "automation-eos-builder-fleet"
+      queue: "automation-basic-builder-fleet"
     timeout: 5
