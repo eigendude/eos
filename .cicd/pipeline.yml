@@ -11,7 +11,7 @@ steps:
     command:
       - "./.cicd/travis/travis-trigger.sh"
     agents:
-      queue: "automation-eos-basic-fleet"
+      queue: "automation-basic-builder-fleet"
 
   - trigger: "eosio-base-images-beta"
     label: ":docker: Ensure Base Images"
