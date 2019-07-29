@@ -121,7 +121,7 @@ steps:
 
   - wait
 
-  - label: ":centos: [Centos] 7 Package Builder"
+  - label: ":centos: [Centos] 7 PB"
     command:
       - "./.cicd/package-builder.sh"
     plugins:
@@ -137,7 +137,7 @@ steps:
       queue: "automation-eos-builder-fleet"
     timeout: 10
 
-  - label: ":ubuntu: [Ubuntu] 16.04 Package Builder"
+  - label: ":ubuntu: [Ubuntu] 16.04 PB"
     command:
       - "./.cicd/package-builder.sh"
     plugins:
@@ -152,7 +152,7 @@ steps:
       queue: "automation-eos-builder-fleet"
     timeout: 10
 
-  - label: ":ubuntu: [Ubuntu] 18.04 Package Builder"
+  - label: ":ubuntu: [Ubuntu] 18.04 PB"
     command:
       - "./.cicd/package-builder.sh"
     plugins:
@@ -167,7 +167,7 @@ steps:
       queue: "automation-eos-builder-fleet"
     timeout: 10
 
-  - label: ":darwin: [Mojave] Package Builder"
+  - label: ":darwin: [Mojave] PB"
     command:
       - "./.cicd/package-builder.sh"
     plugins:
